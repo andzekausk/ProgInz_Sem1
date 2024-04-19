@@ -30,8 +30,15 @@ public class ProgInzSeminar1Application {
 				productRepo.save(p2);
 				productRepo.save(p3);
 				// izsaukt caur repo count()
+				System.out.println("How many products: "+productRepo.count());
 				// izsaukt caur repo findById()
+				System.out.println("Get product by id(2): "+productRepo.findById(2).get());
+				Product productForDeleting = productRepo.findById(2).get();
+				productRepo.delete(productForDeleting);
 				// uztaisiit update caur repo
+				Product productForUpdating = productRepo.findById(1).get();
+				productForUpdating.setPrice(10.56f);
+				productRepo.save(productForUpdating);
 			
 				
 			}
