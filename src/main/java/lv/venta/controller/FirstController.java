@@ -33,14 +33,14 @@ public class FirstController {
 		return "hello-msg-page";
 	}
 
-	@GetMapping("/product/test")
+	@GetMapping("/product/test") // localhost:8080/product/test
 	public String getProductTest(Model model) {
 		Product product = new Product("Abols", 0.99f, "Sarkans un garshigs", 0);
 		model.addAttribute("mydata", product);
 		return "product-show-one-page";
 	}
 
-	@GetMapping("/product/test/all")
+	@GetMapping("/product/test/all") // localhost:8080/product/test/all
 	public String getProductTestAll(Model model) {
 		ArrayList<Product> allProducts = new ArrayList<>(
 				Arrays.asList(
