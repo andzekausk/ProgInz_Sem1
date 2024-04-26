@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.venta.model.Product;
 import lv.venta.service.IProductCRUDService;
@@ -35,8 +36,23 @@ public class ProductCRUDController {
 		
 	}
 	
-	@GetMapping("/{id}") // localhost:8080/product/crud/id
+	@GetMapping("/{id}") // localhost:8080/product/crud/1
 	public String getProductCRUD(@PathVariable("id") int id, Model model) {
+		
+		try {
+			model.addAttribute("mydata", crudService.retrieveById(id));
+			return "product-show-one-page";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			model.addAttribute("msg", e.getMessage());
+			return "error-page";
+		}
+		
+	}
+	
+	@GetMapping("/one") // localhost:8080/product/crud/one?id=1
+	public String getProductCRUDOne(@RequestParam("id") int id, Model model) {
 		
 		try {
 			model.addAttribute("mydata", crudService.retrieveById(id));
