@@ -44,6 +44,7 @@ public class ProductCRUDController {
 		
 		try {
 			model.addAttribute("mydata", crudService.retrieveById(id));
+			model.addAttribute("msg", "All products");
 			return "product-show-one-page";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
