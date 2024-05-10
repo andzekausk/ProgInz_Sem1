@@ -115,4 +115,18 @@ public class ProductCRUDController {
 			return "error-page";
 		}
 	}
+	
+	@GetMapping("/delete/{id}") // localhost:8080/product/crud/delete/1
+	public String getProductCRUDDelete(@PathVariable("id") int id, Model model) {
+		try {
+			crudService.deleteById(id);
+			ArrayList<Product> allProducts = crudService.retrieveAll();
+			model.addAttribute("mydata", allProducts);
+			return "product-show-all";
+		} catch (Exception e) {
+			model.addAttribute("mydata",e.getMessage());
+			return "error-page";
+		}
+		
+	}
 }
