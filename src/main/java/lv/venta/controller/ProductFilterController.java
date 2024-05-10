@@ -32,4 +32,19 @@ public class ProductFilterController {
 		}
 		
 	}
+	
+	@GetMapping("quantity/{param}") // localhost:8080/product/filter/quantity/2
+	public String getProductFilterByQuantity(@PathVariable("param") int param, Model model) {
+		
+		try {
+			ArrayList<Product> result = filterService.filterByQuantity(param);
+			model.addAttribute("mydata", result);
+			model.addAttribute("msg", "products filtered by quantity");
+			return "product-show-all";
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+		
+	}
 }
