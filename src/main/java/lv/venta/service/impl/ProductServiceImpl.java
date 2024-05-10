@@ -39,7 +39,7 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 		if(phrase==null) throw new Exception("Phrase is null");	
 		if (productRepo.count() == 0)
 			throw new Exception("productRepo is empty");
-		ArrayList<Product> filteredProducts = productRepo.findByTitleIgnoreCaseLikeOrDescriptionIgnoreCaseLike(phrase, phrase);
+		ArrayList<Product> filteredProducts = productRepo.findByTitleIgnoreCaseContainingOrDescriptionIgnoreCaseContaining(phrase, phrase);
 		return filteredProducts;
 	}
 

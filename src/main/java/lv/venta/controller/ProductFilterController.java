@@ -47,4 +47,19 @@ public class ProductFilterController {
 		}
 		
 	}
+	
+	@GetMapping("text/{param}") // localhost:8080/product/filter/text/garshigs
+	public String getProductFilterByTitleOrDescription(@PathVariable("param") String param, Model model) {
+		
+		try {
+			ArrayList<Product> result = filterService.filterByTitleOrDescription(param);
+			model.addAttribute("mydata", result);
+			model.addAttribute("msg", "products filtered by title or description");
+			return "product-show-all";
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+		
+	}
 }
