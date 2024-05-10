@@ -6,12 +6,14 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import lv.venta.model.Product;
 import lv.venta.service.IProductCRUDService;
 
@@ -75,9 +77,15 @@ public class ProductCRUDController {
 	}
 	
 	@PostMapping("/insert") // localhost:8080/product/crud/insert
-	public String postProductCRUDInsert(Product product) {
-		System.out.println(product);
-		return "redirect:/product/crud/all";
+	public String postProductCRUDInsert(@Valid Product product, BindingResult result) {
+		//vai ir validacijas parkapumi
+		if(result.hasErrors()) {
+			return "product-insert-page";
+		}
+		else {
+			crudService.create(product);
+			return "redirect:/product/crud/all";	
+		}
 		
 	}
 	
