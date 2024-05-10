@@ -62,4 +62,19 @@ public class ProductFilterController {
 		}
 		
 	}
+	
+	@GetMapping("stat/total") // localhost:8080/product/filter/text/garshigs
+	public String getProductFilterStatTotal(Model model) {
+		
+		try {
+			float result = filterService.calculateTotalValueOfProducts();
+			model.addAttribute("mydata", "Total: "+result+" eur");
+//			model.addAttribute("msg", "products filtered by title or description");
+			return "hello-msg-page";
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+		
+	}
 }
