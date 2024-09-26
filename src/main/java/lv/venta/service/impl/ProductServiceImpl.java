@@ -24,6 +24,15 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 		ArrayList<Product> filteredProducts = productRepo.findByPriceLessThan(threshold);
 		return filteredProducts;
 	}
+	
+	@Override
+	public ArrayList<Product> filterByPriceGreater(float threshold) throws Exception {
+		if(threshold<=0) throw new Exception("Threshold can't be 0 or lower");	
+		if (productRepo.count() == 0)
+			throw new Exception("productRepo is empty");
+		ArrayList<Product> filteredProducts = productRepo.findByPriceGreaterThan(threshold);
+		return filteredProducts;
+	}
 
 	@Override
 	public ArrayList<Product> filterByQuantity(int threshold) throws Exception {

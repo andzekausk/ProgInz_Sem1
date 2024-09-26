@@ -33,6 +33,21 @@ public class ProductFilterController {
 		
 	}
 	
+	@GetMapping("price/more/{param}") // localhost:8080/product/filter/price/more/2
+	public String getProductFilterByPriceMore(@PathVariable("param") float param, Model model) {
+		
+		try {
+			ArrayList<Product> result = filterService.filterByPriceGreater(param);
+			model.addAttribute("mydata", result);
+			model.addAttribute("msg", "products filtered by price more");
+			return "product-show-all";
+		} catch (Exception e) {
+			model.addAttribute("mydata", e.getMessage());
+			return "error-page";
+		}
+		
+	}
+	
 	@GetMapping("quantity/{param}") // localhost:8080/product/filter/quantity/2
 	public String getProductFilterByQuantity(@PathVariable("param") int param, Model model) {
 		
