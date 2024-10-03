@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import lv.venta.model.Product;
+import lv.venta.model.security.MyAuthority;
+import lv.venta.model.security.MyUser;
 import lv.venta.repo.IProductRepo;
 
 @SpringBootApplication
@@ -25,6 +27,14 @@ public class ProgInzSeminar1Application {
 				Product p1 = new Product("Abols", 0.99f, "Sarkans un garshigs", 1);
 				Product p2 = new Product("Citrons", 0.99f, "Dzeltens un skaabs", 2);
 				Product p3 = new Product("Maize", 0.99f, "Maizes kraasaa un maiziiga", 3);
+
+				MyAuthority auth1 = new MyAuthority("ADMIN");
+				MyAuthority auth2 = new MyAuthority("USER");
+
+				MyUser user1 = new MyUser("anzdejs", "123", auth1);
+				MyUser user2 = new MyUser("boopo", "123", auth2);
+				MyUser user3 = new MyUser("poobo", "123", auth2);
+				
 				// ar save funkciju saglabat repozitorijaa
 				productRepo.save(p1);
 				productRepo.save(p2);

@@ -35,7 +35,7 @@ public class MyAuthority {
 	
 	@NotNull
 //	@Size(min=3, max=50)
-	@Pattern(regexp = "[A-Z]{4,7}")
+//	@Pattern(regexp = "[A-Z]{4,7}")
 	@Column(name="Title")
 	private String title;
 	
