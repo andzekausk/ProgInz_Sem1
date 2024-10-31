@@ -51,15 +51,15 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 	}
 
 	@Override
-	public void create(Product product) {
+	public Product create(Product product) {
 		Product existingProduct = productRepo.findByTitleAndDescriptionAndPrice(product.getTitle(),
 				product.getDescription(), product.getPrice());
 		if(existingProduct!=null) {
 			existingProduct.setQuantity(existingProduct.getQuantity()+product.getQuantity());
 			productRepo.save(existingProduct);
-			return;
+			return existingProduct;
 		}
-		productRepo.save(product);
+		return productRepo.save(product);
 
 	}
 
@@ -84,7 +84,7 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 	}
 
 	@Override
-	public void updateById(int id, Product product) throws Exception {
+	public Product updateById(int id, Product product) throws Exception {
 		// 1. atrast objektu
 		Product toUpdate = retrieveById(id);
 		// 2. rediget objektu JAVAs limeni
@@ -94,13 +94,13 @@ public class ProductServiceImpl implements IProductCRUDService, IProductFilterin
 		toUpdate.setTitle(product.getTitle());
 		// 3, saglaba redigeto objektu repo un DB
 		productRepo.save(toUpdate);
-
+		return toUpdate;
 	}
 
 	@Override
-	public void deleteById(int id) throws Exception {
+	public Product deleteById(int id) throws Exception {
 		productRepo.delete(retrieveById(id));
-
+		return retrieveById(id);
 	}
 
 }
